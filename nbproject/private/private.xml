@@ -3,13 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/view/GameClientFrm.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/model/XOButton.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/controller/SocketHandle.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/controller/Client.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/model/Point.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/model/User.java</file>
-            <file>file:/D:/Downloads/BTL_LTM_Client-main/BTL_LTM_Client-main/src/view/GamePanel1.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/model/User.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/GameClientFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/GamePanel1.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/WaitingRoomFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/CardButton.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/RoomNameFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/RankFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/FriendListFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/FindRoomFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/model/XOButton.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/RoomListFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/GameAIFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/LoginFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/CreateRoomPasswordFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/GameNoticeFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/FriendRequestFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/HomePageFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/CompetitorInfoFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/RegisterFrm.java</file>
+            <file>file:/E:/LTM/New%20folder/FlipGame/src/view/JoinRoomPasswordFrm.java</file>
         </group>
     </open-files>
 </project-private>

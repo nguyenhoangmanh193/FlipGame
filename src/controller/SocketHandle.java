@@ -59,12 +59,12 @@ public class SocketHandle implements Runnable {
                 Integer.parseInt(message[start + 7]),
                 Integer.parseInt(message[start + 8]));
     }
-
+    
     @Override
     public void run() {
 
         try {
-            socketOfClient = new Socket("127.0.0.1", 7777);
+            socketOfClient = new Socket("127.0.0.1", 7779);
             System.out.println("Kết nối thành công!");
             outputWriter = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
@@ -227,10 +227,6 @@ public class SocketHandle implements Runnable {
                 if (messageSplit[0].equals("caro")) {
                  
                 }
-               
-                
-
-                
                 if (messageSplit[0].equals("new-game")) {
                     System.out.println("New game");
                     Thread.sleep(4000);
@@ -239,9 +235,17 @@ public class SocketHandle implements Runnable {
              
                 }
                 
-              
+                if (messageSplit[0].equals("game-end")) {
+                    Client.gameClientFrm.stopTimer();
+                    Client.closeAllViews(); // Đóng tất cả các giao diện liên quan đến trò chơi
+                    Client.openView(Client.View.GAME_NOTICE, "Trò chơi đã kết thúc", "Đang trở về trang chủ...");
+                    Thread.sleep(3000);
+                    Client.closeAllViews();
+                    Client.openView(Client.View.HOMEPAGE); // Quay lại trang chủ
+                }
+
                 if (messageSplit[0].equals("left-room")) {
-                  
+                    Client.gameClientFrm.stopTimer();
                     Client.closeAllViews();
                     Client.openView(Client.View.GAME_NOTICE, "Đối thủ đã thoát khỏi phòng", "Đang trở về trang chủ");
                     Thread.sleep(3000);
@@ -254,7 +258,7 @@ public class SocketHandle implements Runnable {
             e.printStackTrace();
         }
     }
-
+    
     public void write(String message) throws IOException {
         outputWriter.write(message);
         outputWriter.newLine();

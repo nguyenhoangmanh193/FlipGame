@@ -114,6 +114,8 @@ public class GameClientFrm extends javax.swing.JFrame {
         preItem[1] = "assets/image/o2_pre.jpg";
         preItem[0] = "assets/image/x2_pre.jpg";
    //     setupButton();
+        setupCardButtonListeners();
+        checkGameEnd();
 
         
         this.addWindowListener(new WindowAdapter() {
@@ -124,11 +126,57 @@ public class GameClientFrm extends javax.swing.JFrame {
         });
 
     }
+        private void setupCardButtonListeners() {
+        for (CardButton card : gameFlip.getCards()) {
+            card.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleCardClick(card);
+                }
+            });
+        }
+    }
 
+    private void handleCardClick(CardButton clickedCard) {
+        // Logic xử lý khi thẻ được nhấn
+        if (gameFlip.getFirstCard() == null) {
+            gameFlip.setFirstCard(clickedCard);
+            clickedCard.flip();
+        } else if (gameFlip.getSecondCard() == null && clickedCard != gameFlip.getFirstCard()) {
+            gameFlip.setSecondCard(clickedCard);
+            clickedCard.flip();
+
+            if (gameFlip.getFirstCard().getId() == gameFlip.getSecondCard().getId()) {
+                gameFlip.getFirstCard().setMatched(true);
+                gameFlip.getSecondCard().setMatched(true);
+                gameFlip.setFirstCard(null);
+                gameFlip.setSecondCard(null);
+                gameFlip.incrementMatchedPairsCount();
+
+                // Kiểm tra xem đã thắng chưa
+                checkGameEnd();
+            } else {
+                // Nếu không khớp, khởi động timer để lật lại thẻ
+                gameFlip.startFlipBackTimer();
+            }
+        }
+    }
+    
+    public void checkGameEnd() {
+    if (getMatchedPairsCount().equals("8")) {  // Giả sử bạn có 8 cặp thẻ trong game
+        JOptionPane.showMessageDialog(this, "Bạn đã thắng! Trận đấu kết thúc.");
+        try {
+            Client.socketHandle.write("win,");  // Gửi thông điệp thắng lên server
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Không thể gửi thông báo đến server.");
+        }
+        exitGame();  // Thoát phòng khi thắng
+    }  
+}
+    
     public void exitGame() {
         try {
-           
-           
+            timer.stop();
             Client.socketHandle.write("left-room,");
             Client.closeAllViews();
             Client.openView(Client.View.HOMEPAGE);
@@ -142,7 +190,7 @@ public class GameClientFrm extends javax.swing.JFrame {
     public void stopAllThread() {
        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -665,13 +713,15 @@ public class GameClientFrm extends javax.swing.JFrame {
                 + "nếu thắng bạn được thêm 10 điểm\n"
                 + "Chúc bạn chơi game vui vẻ");
     }//GEN-LAST:event_helpMenuItemActionPerformed
-
+    public void stopTimer() {
+        timer.stop();
+    }
     private void competotorButtonImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_competotorButtonImageActionPerformed
 
         Client.openView(Client.View.COMPETITOR_INFO, competitor);
 
     }//GEN-LAST:event_competotorButtonImageActionPerformed
-
+    
   
 
 
@@ -685,7 +735,6 @@ public class GameClientFrm extends javax.swing.JFrame {
     }
 
     private String getMatchedPairsCount(){
-        
         return gameFlip.matchedPairsCount();
     }
     /**

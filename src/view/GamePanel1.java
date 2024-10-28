@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 public class GamePanel1 extends javax.swing.JPanel {
-        private final int GRID_SIZE = 4; // 4x4 grid
+    private final int GRID_SIZE = 4; // 4x4 grid
     private final ArrayList<CardButton> cards = new ArrayList<>();
     private CardButton firstCard = null;
     private CardButton secondCard = null;
@@ -66,7 +66,6 @@ public class GamePanel1 extends javax.swing.JPanel {
         revalidate();
         repaint();
     }
-
     private class CardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -95,7 +94,33 @@ public class GamePanel1 extends javax.swing.JPanel {
         String z = String.valueOf(y);
         return z;
     }
+        public CardButton getFirstCard() {
+        return firstCard;
+    }
 
+    public void setFirstCard(CardButton firstCard) {
+        this.firstCard = firstCard;
+    }
+
+    public CardButton getSecondCard() {
+        return secondCard;
+    }
+
+    public void setSecondCard(CardButton secondCard) {
+        this.secondCard = secondCard;
+    }
+
+    public void incrementMatchedPairsCount() {
+        matchedPairsCount++;
+    }
+
+    public ArrayList<CardButton> getCards() {
+        return cards;
+    }
+
+    public void startFlipBackTimer() {
+        timer.start(); // Gọi phương thức timer đã được khởi tạo trong initGame()
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
