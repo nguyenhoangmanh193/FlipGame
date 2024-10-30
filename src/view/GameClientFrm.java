@@ -43,6 +43,8 @@ public class GameClientFrm extends javax.swing.JFrame {
     private Timer timer;
     private Timer updateTimer;
     private Timer updateTimer1;
+    private boolean hasWon = false;
+    
     private int userWin;
     private int competitorWin;
     private boolean isSending;
@@ -114,8 +116,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         preItem[1] = "assets/image/o2_pre.jpg";
         preItem[0] = "assets/image/x2_pre.jpg";
    //     setupButton();
-        setupCardButtonListeners();
-        checkGameEnd();
 
         
         this.addWindowListener(new WindowAdapter() {
@@ -126,54 +126,21 @@ public class GameClientFrm extends javax.swing.JFrame {
         });
 
     }
-        private void setupCardButtonListeners() {
-        for (CardButton card : gameFlip.getCards()) {
-            card.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    handleCardClick(card);
+    private void winGames(){
+            if (!hasWon && coupleFlip.getText().equals("8")) { // Chỉ chạy khi chưa thắng và đủ số cặp đúng
+            hasWon = true; // Đặt cờ để không chạy lại
+             JOptionPane.showMessageDialog(this, "Bạn đã thắng! Trận đấu kết thúc.");
+                try {
+
+                   Client.socketHandle.write("win,");
+
+                //  Client.socketHandle.write("win"+ seconds);
+
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-            });
         }
     }
-
-    private void handleCardClick(CardButton clickedCard) {
-        // Logic xử lý khi thẻ được nhấn
-        if (gameFlip.getFirstCard() == null) {
-            gameFlip.setFirstCard(clickedCard);
-            clickedCard.flip();
-        } else if (gameFlip.getSecondCard() == null && clickedCard != gameFlip.getFirstCard()) {
-            gameFlip.setSecondCard(clickedCard);
-            clickedCard.flip();
-
-            if (gameFlip.getFirstCard().getId() == gameFlip.getSecondCard().getId()) {
-                gameFlip.getFirstCard().setMatched(true);
-                gameFlip.getSecondCard().setMatched(true);
-                gameFlip.setFirstCard(null);
-                gameFlip.setSecondCard(null);
-                gameFlip.incrementMatchedPairsCount();
-
-                // Kiểm tra xem đã thắng chưa
-                checkGameEnd();
-            } else {
-                // Nếu không khớp, khởi động timer để lật lại thẻ
-                gameFlip.startFlipBackTimer();
-            }
-        }
-    }
-    
-    public void checkGameEnd() {
-    if (getMatchedPairsCount().equals("8")) {  // Giả sử bạn có 8 cặp thẻ trong game
-        JOptionPane.showMessageDialog(this, "Bạn đã thắng! Trận đấu kết thúc.");
-        try {
-            Client.socketHandle.write("win,");  // Gửi thông điệp thắng lên server
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Không thể gửi thông báo đến server.");
-        }
-        exitGame();  // Thoát phòng khi thắng
-    }  
-}
-    
     public void exitGame() {
         try {
             timer.stop();
@@ -543,6 +510,7 @@ public class GameClientFrm extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 coupleFlip.setText(getMatchedPairsCount());// Cập nhật JTextField
+                winGames();
             }
         });
         updateTimer.start();

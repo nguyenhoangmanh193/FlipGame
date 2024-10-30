@@ -648,7 +648,7 @@
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="coupleFlip.setEditable(false);&#xa;coupleFlip.setText(getMatchedPairsCount());&#xa;// Timer &#x111;&#x1ec3; c&#x1ead;p nh&#x1ead;t JTextField m&#x1ed7;i gi&#xe2;y&#xa;        updateTimer = new Timer(1000, new ActionListener() {&#xa;            @Override&#xa;            public void actionPerformed(ActionEvent e) {&#xa;               coupleFlip.setText(getMatchedPairsCount());// C&#x1ead;p nh&#x1ead;t JTextField&#xa;            }&#xa;        });&#xa;updateTimer.start();"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="coupleFlip.setEditable(false);&#xa;coupleFlip.setText(getMatchedPairsCount());&#xa;// Timer &#x111;&#x1ec3; c&#x1ead;p nh&#x1ead;t JTextField m&#x1ed7;i gi&#xe2;y&#xa;        updateTimer = new Timer(1000, new ActionListener() {&#xa;            @Override&#xa;            public void actionPerformed(ActionEvent e) {&#xa;               coupleFlip.setText(getMatchedPairsCount());// C&#x1ead;p nh&#x1ead;t JTextField&#xa;               winGames();&#xa;            }&#xa;        });&#xa;updateTimer.start();"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
