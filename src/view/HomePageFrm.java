@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import model.User;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -387,6 +388,13 @@ public class HomePageFrm extends javax.swing.JFrame {
     private void jLabel1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel1AncestorMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1AncestorMoved
+    public void updateUserInfo(User user) {
+        jLabel4.setText(user.getNickname());
+        numberOfGameValue.setText(String.valueOf(user.getNumberOfGame()));
+        numberOfWinValue.setText(String.valueOf(user.getNumberOfWin()));
+        drawValue.setText(String.valueOf(user.getNumberOfDraw()));
+        rankValue.setText(String.valueOf(user.getRank()));
+}
 
     private void createRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoomButtonActionPerformed
         int res = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn đặt mật khẩu cho phòng không?", "Tạo phòng", JOptionPane.YES_NO_OPTION);

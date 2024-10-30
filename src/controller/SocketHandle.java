@@ -224,9 +224,6 @@ public class SocketHandle implements Runnable {
                     JOptionPane.showMessageDialog(Client.homePageFrm, "Đối thủ không đồng ý thách đấu");
                 }
                 //Xử lý đánh một nước trong ván chơi
-                if (messageSplit[0].equals("caro")) {
-                 
-                }
                 if (messageSplit[0].equals("new-game")) {
                     System.out.println("New game");
                     Thread.sleep(4000);
@@ -241,13 +238,29 @@ public class SocketHandle implements Runnable {
                     Client.openView(Client.View.GAME_NOTICE, "Trò chơi đã kết thúc", "Đang trở về trang chủ...");
                     Thread.sleep(3000);
                     Client.closeAllViews();
-                    Client.openView(Client.View.HOMEPAGE); // Quay lại trang chủ
                 }
 
                 if (messageSplit[0].equals("left-room")) {
                     Client.gameClientFrm.stopTimer();
                     Client.closeAllViews();
                     Client.openView(Client.View.GAME_NOTICE, "Đối thủ đã thoát khỏi phòng", "Đang trở về trang chủ");
+                    Thread.sleep(3000);
+                    Client.closeAllViews();
+                    // Xử lý nhận thông tin người dùng mới
+                    
+                }
+                if (messageSplit[0].equals("update-home")) {
+                    User updatedUser = getUserFromString(1, messageSplit);
+                    Client.user = updatedUser; // Cập nhật thông tin người dùng
+                    if (Client.homePageFrm != null) {
+                        Client.homePageFrm.updateUserInfo(updatedUser); // Hiển thị thông tin mới trên trang chủ
+                    }
+                    Client.openView(Client.View.HOMEPAGE);
+                }
+                if (messageSplit[0].equals("exit game")) {
+                    Client.gameClientFrm.stopTimer();
+                    //Client.closeAllViews();
+                    //Client.openView(Client.View.GAME_NOTICE, "Đối thủ đã thoát khỏi phòng", "Đang trở về trang chủ");
                     Thread.sleep(3000);
                     Client.closeAllViews();
                     Client.openView(Client.View.HOMEPAGE);
