@@ -246,6 +246,7 @@ public class SocketHandle implements Runnable {
                     Client.openView(Client.View.GAME_NOTICE, "Đối thủ đã thoát khỏi phòng", "Đang trở về trang chủ");
                     Thread.sleep(3000);
                     Client.closeAllViews();
+                    Client.openView(Client.View.HOMEPAGE);
                     // Xử lý nhận thông tin người dùng mới
                     
                 }
